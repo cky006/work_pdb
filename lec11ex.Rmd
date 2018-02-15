@@ -3,8 +3,8 @@ title: "Working with PDB"
 output: github_document
 ---
 
-```{r pdb_files}
-# Download some example PDB files
+```{r}
+library(bio3d)
 ids <- c("1TND_B","1AGR_A","1TAG_A","1GG2_A","1KJY_A","4G5Q_A")
 files <- get.pdb(ids, split = TRUE)
 # Extract and align the chains we are interested in
@@ -31,7 +31,6 @@ pdbs$ali[, gaps$f.inds]
 seqidentity(pdbs)
 # Calculate RMSD
 rmsd(pdbs)
-# Calculate RMSD
 rd <- rmsd(pdbs)
 # Clustering
 hc <- hclust(as.dist(rd))
@@ -39,7 +38,7 @@ grps <- cutree(hc, k=3)
 # Plot dendrogram
 hclustplot(hc, k=3)
 ```
-```{r gaps}
+```{r}
 # Perform PCA
 pc <- pca(pdbs)
 plot(pc, col=grps)
